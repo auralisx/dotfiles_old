@@ -1,364 +1,8 @@
-// include "input.kdl"
-// include "outputs.kdl"
-// include "layout.kdl"
-// include "animation.kdl"
-// include "rules.kdl"
-// include "misc.kdl"
-// include "binds.kdl"
-
-input {
-    keyboard {
-        xkb {
-        }
-        // numlock
-    }
-
-    touchpad {
-        // off
-        tap
-        dwt
-        dwtp
-        // drag false
-        drag-lock
-        natural-scroll
-        accel-speed 0.7
-        // accel-profile "flat"
-        scroll-method "two-finger"
-        // scroll-factor 1.0
-        // disabled-on-external-mouse
-    }
-
-    mouse {
-        // off
-        // natural-scroll
-        // accel-speed 0.2
-        // accel-profile "flat"
-        // scroll-method "no-scroll"
-    }
-
-    trackpoint {
-        off
-        // natural-scroll
-        // accel-speed 0.2
-        // accel-profile "flat"
-        // scroll-method "on-button-down"
-        // scroll-button 273
-        // scroll-button-lock
-        // middle-emulation
-    }
-
-    // Uncomment this to make the mouse warp to the center of newly focused windows.
-    // warp-mouse-to-focus
-
-    // Focus windows and outputs automatically when moving the mouse into them.
-    // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
-    focus-follows-mouse max-scroll-amount="0%"
-    workspace-auto-back-and-forth
-}
-
-animations {
-    // Uncomment to turn off all animations.
-    // off
-
-    // Slow down all animations by this factor. Values below 1 speed them up instead.
-    // slowdown 3.0
-}
-
-layout {
-    background-color "#24283b"
-    gaps 5
-    center-focused-column "never"
-    always-center-single-column
-    empty-workspace-above-first
-    preset-column-widths {
-        proportion 0.33333
-        proportion 0.5
-        proportion 0.66667
-
-        // fixed 1920
-    }
-    // default-column-display "tabbed"
-    tab-indicator {
-        hide-when-single-tab
-        width 2
-        gap 5
-        position "right"
-        active-color "#b4f9f8"
-        inactive-color "#bb9af7"
-    }
-
-    // preset-window-heights { }
-
-    default-column-width { proportion 0.5; }
-
-    // `draw-border-with-background`.
-
-    focus-ring {
-        off
-        width 1
-        // active-color "#7fc8ff"
-        inactive-color "rgb(86, 95, 137)"
-        active-gradient from="rgb(0,238,255)" to="rgb(250,139,255)" angle=45
-        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
-    }
-
-    border {
-        // The settings are the same as for the focus ring.
-        // If you enable the border, you probably want to disable the focus ring.
-        // off
-        width 1
-        inactive-color "rgb(86, 95, 137)"
-        active-gradient from="rgb(0,238,255)" to="rgb(250,139,255)" angle=45 relative-to="workspace-view" in="oklch longer hue"
-        // active-color "#ffc87f"
-        urgent-color "#9b0000"
-        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
-    }
-
-    insert-hint {
-        // off
-        color "#a9b1d6"
-        gradient from="rgb(0,238,255)" to="rgb(250,139,255)" angle=45 relative-to="workspace-view"
-    }
-
-    shadow {
-        // on
-        // draw-behind-window true
-        softness 30
-        spread 5
-        offset x=0 y=5
-        color "#0007"
-    }
-
-    struts {
-        // left 64
-        // right 64
-        // top 64
-        // bottom 64
-    }
-}
-
-gestures {
-    hot-corners {
-        off
-        // top-left
-        // top-right
-        // bottom-left
-        // bottom-right
-    }
-}
-
-output "eDP-1" {
-    mode "1920x1080@60.05"
-    scale 1
-    transform "normal"
-    position x=0 y=0
-    focus-at-startup
-}
-
-output "HDMI-A-1" {
-    mode "1920x1080@120.00"
-    scale 1
-    transform "normal"
-    position x=-1920 y=0
-}
-
-workspace "dev" {
-  open-on-output "eDP-1"
-}
-
-workspace "web" {
-  open-on-output "HDMI-A-1"
-}
-
-workspace "entertainment" {
-  open-on-output "HDMI-A-1"
-}
-
-workspace "ai" {
-  open-on-output "HDMI-A-1"
-}
-
-window-rule {
-    match app-id="^brave-browser$"
-    match app-id=r#"firefox$"#
-    match app-id="firefox-developer-edition"
-    match app-id="^vivaldi-stable$"
-
-    open-on-workspace "web"
-    open-maximized true
-}
-
-window-rule {
-    match app-id="^chromium$"
-
-    open-on-workspace "entertainment"
-    open-maximized true
-}
-
-window-rule {
-    match app-id="^code$"
-    match app-id="^dev.zed.Zed$"
-
-    open-on-workspace "dev"
-    open-maximized true
-}
-
-window-rule {
-    match app-id="^gimp"
-
-    open-maximized true
-}
-
-// Open the Firefox picture-in-picture player as floating by default.
-window-rule {
-    match title="^Picture-in-Picture$"
-    match title="^(Open File)(.*)$"
-    match title="^(Select a File)(.*)$"
-    match title="^(Choose wallpaper)(.*)$"
-    match title="^(Open Folder)(.*)$"
-    match title="^(Save As)(.*)$"
-    match title="^(Library)(.*)$"
-    match title="^(File Upload)(.*)$"
-    match title="^(Export)(.*)$"
-    match title="^(file_progress)$"
-    match title="^(confirm)$"
-    match title="^(dialog)$"
-    match title="^(download)$"
-    match title="^(error)$"
-    match title="^(Volume Control)$"
-    match title="^(Choose Files)$"
-    match title="^(Save As)$"
-    match title="^(Confirm to replace files)$"
-    match title="^(File Operation Progress)$"
-    match title="^(DevTools)$"
-    match title="^(Open File)$"
-    match title="^(Media viewer)$"
-    match title="^(Open)$"
-    match title="^(xdg-desktop-portal-gtk)(.*)$"
-
-    match app-id="org.gnome.Nautilus"
-    match app-id="com.system76.CosmicFiles"
-    match app-id="^(org.gnome.polkit-gnome-authentication-agent-1)$"
-    match app-id="^(qt5ct)$"
-    match app-id="^(qt6ct)$"
-    match app-id="^(nwg-look)$"
-    match app-id="^(rofi)$"
-    match app-id="^(com.github.hluk.copyq)$"
-    match app-id="^(notification)$"
-    match app-id="^(pavucontrol)$"
-    match app-id="^(blueman-manager)$"
-    match app-id="^(nm-applet)$"
-    match app-id="^(nm-connection-editor)$"
-    match app-id="^(waypaper)$"
-    match app-id="^(Emulator)$"
-
-    open-floating true
-    tiled-state false
-    // default-column-width { proportion 0.6; }
-}
-
-// Indicate screencasted windows with red colors.
-window-rule {
-    match is-window-cast-target=true
-
-    focus-ring {
-        active-color "#f38ba8"
-        inactive-color "#7d0d2d"
-    }
-
-    border {
-        inactive-color "#7d0d2d"
-    }
-
-    tab-indicator {
-        active-color "#f38ba8"
-        inactive-color "#7d0d2d"
-    }
-}
-
-// Example: enable rounded corners for all windows.
-// (This example rule is commented out with a "/-" in front.)
-window-rule {
-    geometry-corner-radius 5
-    clip-to-geometry true
-}
-
-layer-rule {
-    match namespace="waybar"
-    match namespace="^notifications$"
-    match at-startup=true
-
-    // Properties that apply continuously.
-    block-out-from "screencast"
-    // block-out-from "screen-capture"
-
-    shadow {
-        // on
-        off
-        softness 40
-        spread 5
-        offset x=0 y=5
-        draw-behind-window true
-        color "#00000064"
-        // inactive-color "#00000064"
-    }
-}
-
-// Put inside the overview backdrop.
-layer-rule {
-    match namespace="^wallpaper$"
-    place-within-backdrop true
-}
-
-prefer-no-csd
-
-screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
-
-environment {
-    DISPLAY null
-    GDK_BACKEND "wayland"
-    GTK_THEME "Sweet:dark"
-
-    QT_QPA_PLATFORM "wayland"
-    QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
-    QT_QPA_PLATFORMTHEME "qt5ct"
-    QT_QPA_PLATFORMTHEME "qt6ct"
-
-    MOZ_ENABLE_WAYLAND "1"
-    ELECTRON_OZONE_PLATFORM_HINT "auto"
-
-    XDG_SESSION_TYPE "wayland"
-    XDG_CURRENT_DESKTOP "niri"
-    XDG_SESSION_DESKTOP "niri"
-}
-
-cursor {
-    hide-when-typing
-    hide-after-inactive-ms 5000
-}
-
-overview {
-    zoom 0.5
-    backdrop-color "#24283b"
-
-    workspace-shadow {
-        off
-        softness 40
-        spread 10
-        offset x=0 y=10
-        color "#00000050"
-    }
-}
-
-xwayland-satellite {
-    // off
-    path "xwayland-satellite"
-}
-
-hotkey-overlay {
-    skip-at-startup
-    hide-not-bound
-}
+include "input.kdl"
+include "layout.kdl"
+include "rules.kdl"
+include "recent-windows.kdl"
+include "misc.kdl"
 
 binds {
     // Most actions that you can bind here can also be invoked programmatically with
@@ -377,15 +21,15 @@ binds {
     Print hotkey-overlay-title="<b>Screenshot: </b> Region" { screenshot; }
     Mod+Shift+Print hotkey-overlay-title="<b>Screenshot: </b> Screen" { screenshot-screen; }
     Mod+Alt+Print hotkey-overlay-title="<b>Screenshot: </b> Window" { screenshot-window; }
-    Mod+Print hotkey-overlay-title="<b>Screenshot With Annotation: </b> Region" { spawn "fish" "-c" "grim -g \"$(slurp -c '#bb9af7')\" -t ppm - | satty --filename - --fullscreen --output-filename ~/Pictures/satty-$(date '+%Y%m%d-%H:%M:%S').png"; }
+    Mod+Print allow-when-locked=true hotkey-overlay-title="<b>Screenshot With Annotation: </b> Region" { spawn "fish" "-c" "grim -g \"$(slurp -c '#bb9af7')\" -t ppm - | satty --filename - --fullscreen --output-filename ~/Pictures/satty-$(date '+%Y%m%d-%H:%M:%S').png"; }
     Mod+Ctrl+Print hotkey-overlay-title="<b>Screenshot With Annotation: </b> Screen" { spawn "fish" "-c" "grim -g \"$(slurp -o -r -c '#bb9af7')\" -t ppm - | satty --filename - --fullscreen --output-filename ~/Pictures/satty-$(date '+%Y%m%d-%H:%M:%S').png"; }
 
     // Primary Applications
     Mod+Return  {spawn "ghostty"; }
+    Mod+Semicolon { spawn "fuzzel"; }
     Mod+Z  {spawn "zeditor"; }
     Mod+B { spawn "firefox-developer-edition"; }
     Mod+Alt+B { spawn "vivaldi"; }
-    Mod+Semicolon { spawn "fuzzel"; }
     Mod+Alt+E { spawn "nautilus"; }
     Mod+Alt+C { spawn "copyq" "toggle"; }
     Mod+Alt+P { spawn "hyprpicker" "-a"; }
@@ -427,6 +71,8 @@ binds {
 
     Mod+Left  { focus-monitor-left; }
     Mod+Right    { focus-monitor-right; }
+    Mod5+H  { focus-monitor-left; }
+    Mod5+L    { focus-monitor-right; }
 
     Mod+Shift+Left  { move-window-to-monitor-left; }
     Mod+Shift+Right { move-window-to-monitor-right; }
@@ -552,8 +198,6 @@ binds {
     Mod+Ctrl+C { move-column-to-workspace "dev"; }
     Mod+Ctrl+W { move-column-to-workspace "web"; }
     Mod+Ctrl+E { move-column-to-workspace "entertainment"; }
-
-    Mod+Tab { focus-workspace-previous; }
 
     // Move the focused window between the floating and the tiling layout.
     Mod+F       { toggle-window-floating; }

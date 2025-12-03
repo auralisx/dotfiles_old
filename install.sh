@@ -20,7 +20,7 @@ PACMAN_PACKAGES=(
 
     # Personal packages
     firefox-developer-edition vivaldi
-    neovim zed helix
+    neovim zed
     copyq satty kooha swww
     ghostty
     sudo-rs
@@ -48,7 +48,6 @@ CONFIG_FOLDER=(
     "fish"
     "fuzzel"
     "ghostty"
-    "helix"
     "hypr"
     "niri"
     "nvim"

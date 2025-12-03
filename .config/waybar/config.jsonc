@@ -11,7 +11,6 @@
     "gtk-layer-shell": true,
     "reload_style_on_change": true,
     "modules-left": [
-      "custom/updates",
       "clock",
       "bluetooth",
       "network",

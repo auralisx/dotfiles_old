@@ -36,7 +36,7 @@ window-rule {
     match app-id="^vivaldi-stable$"
 
     open-on-workspace "web"
-    open-maximized-to-edges true
+    open-maximized true
     open-focused true
 }
 
@@ -44,7 +44,7 @@ window-rule {
     match app-id="^chromium$"
 
     open-on-workspace "entertainment"
-    open-maximized-to-edges true
+    open-maximized true
     open-focused true
 }
 
@@ -53,14 +53,14 @@ window-rule {
     match app-id="^dev.zed.Zed$"
 
     open-on-workspace "dev"
-    open-maximized-to-edges true
+    open-maximized true
     open-focused true
 }
 
 window-rule {
     match app-id="^gimp"
 
-    open-maximized-to-edges true
+    open-maximized true
     open-focused true
 }
 

@@ -12,7 +12,7 @@ BACKUP_DIR="$HOME/old_config_$(date +%Y%m%d%H%M%S)"
 
 PACMAN_PACKAGES=(
     # System packages
-    niri hypridle hyprlock hyprpicker xdg-desktop-portal-gtk xdg-desktop-portal-gnome polkit-gnome gnome-keyring gvfs-mtp xwayland-satellite
+    niri hypridle hyprlock xdg-desktop-portal-gtk xdg-desktop-portal-gnome polkit-gnome gnome-keyring gvfs-mtp xwayland-satellite
     pipewire pipewire-alsa pipewire-jack pipewire-pulse pipewire-zeroconf wireplumber qpwgraph pavucontrol sof-firmware
     waybar swaync bluez bluez-utils blueman networkmanager network-manager-applet brightnessctl fuzzel reflector
     wl-clipboard grim slurp
@@ -20,6 +20,7 @@ PACMAN_PACKAGES=(
 
     # Personal packages
     firefox-developer-edition vivaldi
+    hyprpicker
     neovim zed
     copyq satty kooha swww
     ghostty
@@ -30,6 +31,7 @@ PACMAN_PACKAGES=(
     tlp
     snapper btrfs-assistant snap-pac
     npm
+    nwg-look
     iptables-nft ufw
 )
 

@@ -74,16 +74,16 @@
           "command": "waypaper"
         },
         {
-          "label": " ",
-          "command": "vlc"
+          "label": "",
+          "command": "kooha"
         },
         {
-          "label": "",
-          "command": "ghostty -e paru"
+          "label": "",
+          "command": "pavucontrol"
         },
         {
-          "label": "",
-          "command": "firefox-developer-edition"
+          "label": "󰔎",
+          "command": "nwg-look"
         }
       ]
     }

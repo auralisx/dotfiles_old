@@ -1,6 +1,5 @@
 environment {
     DISPLAY null
-    GDK_BACKEND "wayland"
     GTK_THEME "Sweet:dark"
 
     QT_QPA_PLATFORM "wayland"

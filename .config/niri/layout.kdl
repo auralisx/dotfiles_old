@@ -45,6 +45,7 @@ layout {
         // The settings are the same as for the focus ring.
         // If you enable the border, you probably want to disable the focus ring.
         // off
+        on
         width 1
         inactive-color "rgb(86, 95, 137)"
         active-gradient from="rgb(0,238,255)" to="rgb(250,139,255)" angle=45 relative-to="workspace-view" in="oklch longer hue"

@@ -26,47 +26,8 @@
       "temperature",
       "group/cpu-load",
       "memory",
-      "group/power",
     ],
     // Group Configuration
-    "group/power": {
-      "orientation": "inherit",
-      "drawer": {
-        "transition-duration": 500,
-        "children-class": "power-child",
-        "transition-left-to-right": false,
-      },
-      "modules": [
-        "custom/power", // First element is the "group leader" and won't ever be hidden
-        "custom/quit",
-        "custom/lock",
-        "custom/reboot",
-      ],
-    },
-    "custom/quit": {
-      "format": "󰗼",
-      "tooltip": true,
-      "tooltip-format": "Quit",
-      "on-click": "hyprctl dispatch exit",
-    },
-    "custom/lock": {
-      "format": "󰍁",
-      "tooltip": true,
-      "tooltip-format": "Lock",
-      "on-click": "hyprlock",
-    },
-    "custom/reboot": {
-      "format": "󰜉",
-      "tooltip": true,
-      "tooltip-format": "Reboot",
-      "on-click": "reboot",
-    },
-    "custom/power": {
-      "format": "",
-      "tooltip": true,
-      "tooltip-format": "Shutdown",
-      "on-click": "shutdown now",
-    },
     "group/cpu-load": {
       "orientation": "inherit",
       "drawer": {

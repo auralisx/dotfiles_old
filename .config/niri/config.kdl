@@ -28,7 +28,15 @@ binds {
     Mod+Return  {spawn "ghostty"; }
     Mod+Semicolon { spawn "fuzzel"; }
     Mod+Z { spawn "zeditor"; }
-    Mod+Menu hotkey-overlay-title="<b>Launch Project: </b> Zeditor" { spawn-sh "zeditor \"$(fd -d 1 --type d . ~/Projects | fuzzel --dmenu --prompt=\"Open Project: \" --lines=15 --width=80)\" &";}
+    Mod+ALt+D { spawn-sh "zeditor ~/dotfiles/"; }
+    Mod+Menu hotkey-overlay-title="<b>Launch Project:</b> Zeditor" {
+        spawn-sh "
+            project=$(fd -d 1 --type d . ~/Projects | fuzzel --dmenu --prompt='Open Project: ' --lines=15 --width=80) &&
+            [ -n \"$project\" ] &&
+            zeditor \"$project\"
+        "
+    }
+
     Mod+B { spawn "firefox-developer-edition"; }
     Mod+Alt+B { spawn "vivaldi"; }
     Mod+Alt+E { spawn "nautilus"; }

@@ -8,12 +8,13 @@ set -Ux fish_user_paths $fish_user_paths $HOME/.local/bin
 ### EXPORT ###
 set fish_greeting                                    # Supresses fish's intro message
 set TERM "xterm-256color"                            # Sets the terminal type
-set -x EDITOR "nvim"                                  # $EDITOR use vim in terminal
-if command -q zeditor
-    set -x VISUAL zeditor
-else
-    set -x VISUAL nvim
-end
+set -x EDITOR "nvim"                                  # $EDITOR use nvim in terminal
+set -x VISUAL "nvim"                                  # $EDITOR use nvim in terminal
+# if command -q zeditor
+#     set -x VISUAL zeditor
+# else
+#     set -x VISUAL nvim
+# end
 set -gx GPG_TTY (tty)
 
 # Prevent directories names from being shortened

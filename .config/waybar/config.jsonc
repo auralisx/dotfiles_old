@@ -17,7 +17,9 @@
       "privacy",
       "hyprland/submap",
     ],
-    "modules-center": ["niri/window"],
+    "modules-center": [
+      "niri/window"
+    ],
     "modules-right": [
       "mpris",
       "battery",
@@ -35,7 +37,10 @@
         "children-class": "cpu-load-child",
         "transition-left-to-right": false,
       },
-      "modules": ["cpu", "load"],
+      "modules": [
+        "cpu",
+        "load"
+      ],
     },
     "cpu": {
       "interval": 1,
@@ -51,7 +56,17 @@
     "backlight": {
       "device": "intel_backlight",
       "format": "{icon} {percent}%",
-      "format-icons": ["", "", "", "", "", "", "", "", ""],
+      "format-icons": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
       "on-scroll-up": "brightnessctl set 1%+",
       "on-scroll-down": "brightnessctl set 1%-",
     },
@@ -79,7 +94,11 @@
       // "format-critical": "{temperatureC}°C {icon}",
       "format": "{icon} {temperatureC}°C",
       "format-alt": "{temperatureF}°F {icon}",
-      "format-icons": ["", "", ""],
+      "format-icons": [
+        "",
+        "",
+        ""
+      ],
       "tooltip": false,
     },
     "niri/window": {
@@ -105,7 +124,7 @@
         {
           "type": "audio-in",
           "tooltip": true,
-          "tooltip-icon-size": 14,
+          "tooltip-icon-size": 10,
         },
       ],
     },
@@ -121,7 +140,13 @@
       "tooltip-format-ethernet": "{ipaddr}/{cidr}  {bandwidthUpBytes}  {bandwidthDownBytes}",
       "tooltip-format-disconnected": "Disconnected ⚠",
       "max-length": 50,
-      "format-icons": ["󰤯 ", "󰤟 ", "󰤢 ", "󰤢 ", "󰤨 "],
+      "format-icons": [
+        "󰤯 ",
+        "󰤟 ",
+        "󰤢 ",
+        "󰤢 ",
+        "󰤨 "
+      ],
     },
     "clock": {
       "format": "⏰{:%I:%M %p}",
@@ -167,7 +192,19 @@
       "tooltip": "{time} {icon}",
       "format-alt": "{timeTo} / {health}",
       "format-full": "⚡ {capacity}%",
-      "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+      "format-icons": [
+        "󰂎",
+        "󰁺",
+        "󰁻",
+        "󰁼",
+        "󰁽",
+        "󰁾",
+        "󰁿",
+        "󰂀",
+        "󰂁",
+        "󰂂",
+        "󰁹"
+      ],
     },
     "wireplumber": {
       "format": "{icon} {volume}%",
@@ -175,7 +212,11 @@
       // "format-muted": " {format_source}",
       // "format-source": "{source_volume}% ",
       // "format-source-muted": " ",
-      "format-icons": [" ", " ", " "],
+      "format-icons": [
+        " ",
+        " ",
+        " "
+      ],
       "scroll-step": 0.2,
       "max-volume": 100,
       "on-click": "pavucontrol",
@@ -202,14 +243,6 @@
       // "ignored-players": ["cmus", "spotify"]
     },
     // Custom
-    "custom/updates": {
-      "format": "{} ",
-      "interval": 3600,
-      "exec-if": "exit 0",
-      "exec": "checkupdates | wc -l",
-      "signal": 8,
-      "tooltip": false,
-    },
   },
   {
     "name": "bottombar",
@@ -222,9 +255,16 @@
     "passthrough": false,
     "gtk-layer-shell": true,
     "reload_style_on_change": true,
-    "modules-left": ["niri/workspaces"],
-    "modules-center": ["wlr/taskbar"],
-    "modules-right": ["tray", "custom/notification"],
+    "modules-left": [
+      "niri/workspaces"
+    ],
+    "modules-center": [
+      "wlr/taskbar"
+    ],
+    "modules-right": [
+      "tray",
+      "custom/notification"
+    ],
     "niri/workspaces": {
       "format": "{icon}",
       "format-icons": {
@@ -243,7 +283,6 @@
         "8": "8",
         "9": "9",
         "10": "10",
-
         // Icons by state
         // "active": ""
         // "default": " "

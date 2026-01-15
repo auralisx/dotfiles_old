@@ -22,10 +22,10 @@ PACMAN_PACKAGES=(
     firefox-developer-edition vivaldi
     hyprpicker
     neovim zed
-    copyq satty kooha swww
+    copyq satty obs-studio swww
     ghostty
     sudo-rs
-    fish exa fzf ripgrep zoxide starship lazygit zellij btop bat
+    fish exa fzf ripgrep zoxide starship lazygit zellij btop bat tree
     yazi 7zip jq resvg fd imagemagick poppler
     mpv
     tlp
@@ -185,6 +185,7 @@ enable_services() {
         tlp.service
         snapper-cleanup.timer
         snapper-timeline.timer
+        ufw.service
     )
 
     for svc in "${services[@]}"; do

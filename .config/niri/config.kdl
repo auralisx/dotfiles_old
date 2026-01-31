@@ -20,18 +20,20 @@ binds {
     // Screenshot
     Print hotkey-overlay-title="<b>Screenshot: </b> Region" { screenshot; }
     Mod+Shift+Print hotkey-overlay-title="<b>Screenshot: </b> Screen" { screenshot-screen; }
-    Mod+Alt+Print hotkey-overlay-title="<b>Screenshot: </b> Window" { screenshot-window; }
+    Mod+Ctrl+Print hotkey-overlay-title="<b>Screenshot: </b> Window" { screenshot-window; }
     Mod+Print allow-when-locked=true hotkey-overlay-title="<b>Screenshot With Annotation: </b> Region" { spawn "fish" "-c" "grim -g \"$(slurp -c '#bb9af7')\" -t ppm - | satty --filename - --fullscreen --output-filename ~/Pictures/satty-$(date '+%Y%m%d-%H:%M:%S').png"; }
-    Mod+Ctrl+Print hotkey-overlay-title="<b>Screenshot With Annotation: </b> Screen" { spawn "fish" "-c" "grim -g \"$(slurp -o -r -c '#bb9af7')\" -t ppm - | satty --filename - --fullscreen --output-filename ~/Pictures/satty-$(date '+%Y%m%d-%H:%M:%S').png"; }
+    Mod+Alt+Print hotkey-overlay-title="<b>Screenshot With Annotation: </b> Screen" { spawn "fish" "-c" "grim -g \"$(slurp -o -r -c '#bb9af7')\" -t ppm - | satty --filename - --fullscreen --output-filename ~/Pictures/satty-$(date '+%Y%m%d-%H:%M:%S').png"; }
 
     // Primary Applications
-    Mod+Return  {spawn "ghostty"; }
-    Mod+Semicolon { spawn "fuzzel"; }
+    Mod+Return hotkey-overlay-title="<b>Open a Terminal: </b> Ghostty" {spawn "ghostty"; }
+    Mod+Semicolon hotkey-overlay-title="<b>Run an Application: </b> Fuzzel" { spawn "fuzzel"; }
+    Mod+Shift+Ctrl+L hotkey-overlay-title="<b>Lock Screen: </b> Hyprlock" allow-when-locked=true { spawn "hyprlock"; }
     Mod+Z { spawn "zeditor"; }
-    Mod+ALt+D { spawn-sh "zeditor ~/dotfiles/"; }
-    Mod+Menu hotkey-overlay-title="<b>Launch Project:</b> Zeditor" {
+
+    Mod+Alt+D { spawn-sh "zeditor ~/dotfiles/"; }
+    Mod+Alt+Menu hotkey-overlay-title="<b>Launch Project:</b> Zeditor" {
         spawn-sh "
-            project=$(fd -d 1 --type d . ~/Projects | fuzzel --dmenu --prompt='Open Project: ' --lines=15 --width=80) &&
+            project=$(fd -d 1 --type d . ~/Projects | fuzzel --dmenu --prompt='Open Project: ' --lines=15 --width=60) &&
             [ -n \"$project\" ] &&
             zeditor \"$project\"
         "
@@ -40,11 +42,9 @@ binds {
     Mod+B { spawn "firefox-developer-edition"; }
     Mod+Alt+B { spawn "vivaldi"; }
     Mod+Alt+E { spawn "nautilus"; }
-    Mod+Alt+C { spawn "copyq" "toggle"; }
+    Mod+Menu { spawn "copyq" "toggle"; }
     Mod+Alt+P { spawn "hyprpicker" "-a"; }
     Mod+Alt+Y { spawn "chromium"; }
-
-    Mod+Shift+Ctrl+L allow-when-locked=true { spawn "hyprlock"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-"; }
@@ -54,17 +54,24 @@ binds {
     XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+1%"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "1%-"; }
     Mod+XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "100%"; }
-    Mod+XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "5%"; }
+    Mod+XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "1%"; }
+
+    // Example media keys mapping using playerctl.
+    // This will work with any MPRIS-enabled media player.
+    XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
+    XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop"; }
+    XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
+    XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
 
     Mod+H     { focus-column-left; }
     Mod+J     { focus-window-or-workspace-down; }
     Mod+K     { focus-window-or-workspace-up; }
     Mod+L     { focus-column-right; }
 
-    Mod+Shift+H     { move-column-left; }
+    Mod+Shift+H     { move-column-left-or-to-monitor-left; }
     Mod+Shift+J     { move-window-down-or-to-workspace-down; }
     Mod+Shift+K     { move-window-up-or-to-workspace-up; }
-    Mod+Shift+L     { move-column-right; }
+    Mod+Shift+L     { move-column-right-or-to-monitor-right; }
 
     Mod+Home { focus-column-first; }
     Mod+End  { focus-column-last; }
@@ -80,16 +87,15 @@ binds {
     Mod+Ctrl+Left  { move-column-to-monitor-left; }
     Mod+Ctrl+Right { move-column-to-monitor-right; }
 
+    // And you can also move a whole workspace to another monitor:
+    Mod+Shift+Ctrl+Left  { move-workspace-to-monitor-left; }
+    Mod+Shift+Ctrl+Right  { move-workspace-to-monitor-right; }
+
     // The following binds move the focused window in and out of a column.
     // If the window is alone, they will consume it into the nearby column to the side.
     // If the window is already in a column, they will expel it out.
-    Mod+BracketLeft  { consume-or-expel-window-left; }
-    Mod+BracketRight { consume-or-expel-window-right; }
-
-    // Consume one window from the right to the bottom of the focused column.
-    Mod+Comma  { consume-window-into-column; }
-    // Expel the bottom window from the focused column to the right.
-    Mod+Period { expel-window-from-column; }
+    Mod+Comma  { consume-or-expel-window-left; }
+    Mod+Period { consume-or-expel-window-right; }
 
     Mod+R { switch-preset-column-width; }
     Mod+Shift+R { switch-preset-window-height; }
@@ -99,7 +105,16 @@ binds {
     Mod+Alt+M { toggle-windowed-fullscreen; }
     Mod+Ctrl+F { expand-column-to-available-width; }
 
-    // Mod+E { center-column; }
+    // Move the focused window between the floating and the tiling layout.
+    Mod+F       { toggle-window-floating; }
+    Mod+Shift+F { switch-focus-between-floating-and-tiling; }
+
+    // Toggle tabbed column display mode.
+    // Windows in this column will appear as vertical tabs,
+    // rather than stacked on top of each other.
+    Mod+T { toggle-column-tabbed-display; }
+
+    // Mod+C { center-column; }
 
     // Center all fully visible columns on screen.
     // Mod+Ctrl+E { center-visible-columns; }
@@ -132,25 +147,6 @@ binds {
     // Finer height adjustments when in column with other windows.
     Mod+Shift+Minus { set-window-height "-10%"; }
     Mod+Shift+Equal { set-window-height "+10%"; }
-
-
-    Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
-    Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
-    Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
-    Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
-
-    Mod+WheelScrollRight      { focus-column-right; }
-    Mod+WheelScrollLeft       { focus-column-left; }
-    Mod+Ctrl+WheelScrollRight { move-column-right; }
-    Mod+Ctrl+WheelScrollLeft  { move-column-left; }
-
-    Mod+Shift+WheelScrollDown      { focus-column-right; }
-    Mod+Shift+WheelScrollUp        { focus-column-left; }
-    Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
-    Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
-
-    // Mod+TouchpadScrollDown { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02+"; }
-    // Mod+TouchpadScrollUp   { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02-"; }
 
     // You can refer to workspaces by index. However, keep in mind that
     // niri is a dynamic workspace system, so these commands are kind of
@@ -199,18 +195,6 @@ binds {
     Mod+Ctrl+W { move-column-to-workspace "web"; }
     Mod+Ctrl+E { move-column-to-workspace "entertainment"; }
 
-    // Move the focused window between the floating and the tiling layout.
-    Mod+F       { toggle-window-floating; }
-    Mod+Shift+F { switch-focus-between-floating-and-tiling; }
-
-    // Toggle tabbed column display mode.
-    // Windows in this column will appear as vertical tabs,
-    // rather than stacked on top of each other.
-    Mod+T { toggle-column-tabbed-display; }
-
-    // Actions to switch layouts.
-    Mod+N { switch-layout "next"; }
-    Mod+P { switch-layout "prev"; }
 
     // Applications such as remote-desktop clients and software KVM switches may
     // request that niri stops processing the keyboard shortcuts defined here

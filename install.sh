@@ -21,7 +21,7 @@ PACMAN_PACKAGES=(
     # Personal packages
     firefox-developer-edition vivaldi
     hyprpicker
-    neovim zed
+    neovim zed biome
     copyq satty obs-studio swww
     ghostty
     sudo-rs

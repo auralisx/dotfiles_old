@@ -75,10 +75,10 @@
         },
         {
           "label": "",
-          "command": "kooha"
+          "command": "obs"
         },
         {
-          "label": "",
+          "label": "",
           "command": "pavucontrol"
         },
         {

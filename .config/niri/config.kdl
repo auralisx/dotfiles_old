@@ -30,13 +30,13 @@ binds {
     Mod+Shift+Ctrl+L hotkey-overlay-title="<b>Lock Screen: </b> Hyprlock" allow-when-locked=true { spawn "hyprlock"; }
     Mod+Z { spawn "zeditor"; }
 
-    Mod+Alt+D { spawn-sh "zeditor ~/dotfiles/"; }
+    Mod+Alt+D hotkey-overlay-title="<b>Edit Dotfiles: </b> ~/dotfiles/" { spawn-sh "zeditor ~/dotfiles/"; }
     Mod+Alt+Menu hotkey-overlay-title="<b>Launch Project:</b> Zeditor" {
         spawn-sh "
             project=$(fd -d 1 --type d . ~/Projects | fuzzel --dmenu --prompt='Open Project: ' --lines=15 --width=60) &&
             [ -n \"$project\" ] &&
             zeditor \"$project\"
-        "
+        ";
     }
 
     Mod+B { spawn "firefox-developer-edition"; }

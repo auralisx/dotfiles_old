@@ -22,10 +22,10 @@ PACMAN_PACKAGES=(
     firefox-developer-edition vivaldi
     hyprpicker
     neovim zed biome
-    copyq satty obs-studio swww
+    copyq satty obs-studio awww
     ghostty
     sudo-rs
-    fish exa fzf ripgrep zoxide starship lazygit zellij btop bat tree
+    fish exa fzf ripgrep zoxide starship lazygit zellij btop bat tree bottom
     yazi 7zip jq resvg fd imagemagick poppler
     mpv
     tlp
@@ -33,6 +33,7 @@ PACMAN_PACKAGES=(
     npm
     nwg-look
     iptables-nft ufw
+    nix
 )
 
 # AUR packages

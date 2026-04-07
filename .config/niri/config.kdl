@@ -19,10 +19,10 @@ binds {
 
     // Screenshot
     Print hotkey-overlay-title="<b>Screenshot: </b> Region" { screenshot; }
-    Mod+Shift+Print hotkey-overlay-title="<b>Screenshot: </b> Screen" { screenshot-screen; }
-    Mod+Ctrl+Print hotkey-overlay-title="<b>Screenshot: </b> Window" { screenshot-window; }
+    Shift+Print hotkey-overlay-title="<b>Screenshot: </b> Screen" { screenshot-screen; }
+    Ctrl+Print hotkey-overlay-title="<b>Screenshot: </b> Window" { screenshot-window; }
     Mod+Print allow-when-locked=true hotkey-overlay-title="<b>Screenshot With Annotation: </b> Region" { spawn "fish" "-c" "grim -g \"$(slurp -c '#bb9af7')\" -t ppm - | satty --filename - --fullscreen --output-filename ~/Pictures/satty-$(date '+%Y%m%d-%H:%M:%S').png"; }
-    Mod+Alt+Print hotkey-overlay-title="<b>Screenshot With Annotation: </b> Screen" { spawn "fish" "-c" "grim -g \"$(slurp -o -r -c '#bb9af7')\" -t ppm - | satty --filename - --fullscreen --output-filename ~/Pictures/satty-$(date '+%Y%m%d-%H:%M:%S').png"; }
+    Mod+Shift+Print hotkey-overlay-title="<b>Screenshot With Annotation: </b> Screen" { spawn "fish" "-c" "grim -g \"$(slurp -o -r -c '#bb9af7')\" -t ppm - | satty --filename - --fullscreen --output-filename ~/Pictures/satty-$(date '+%Y%m%d-%H:%M:%S').png"; }
 
     // Primary Applications
     Mod+Return hotkey-overlay-title="<b>Open a Terminal: </b> Ghostty" {spawn "ghostty"; }

@@ -1,22 +1,17 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:vcs-files"
-rev = "03cdd4b"
-hash = "4ee57085277d616acfa0ef1fef37dc00"
+rev = "e84f4fe"
+hash = "f6e6a829c6dc6c900a75bebe422a5c33"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "03cdd4b"
-hash = "36a484acf6a0a0219c543ccb4cee218f"
+rev = "e84f4fe"
+hash = "26db011a778f261d730d4f5f8bf24b3f"
 
 [[plugin.deps]]
 use = "atareao/convert"
 rev = "ce060d9"
 hash = "1c0465351f2a344e842f065ab316f265"
-
-[[plugin.deps]]
-use = "yazi-rs/plugins:piper"
-rev = "03cdd4b"
-hash = "2dd68af59418b631b9703a03f606b31f"
 
 [[flavor.deps]]
 use = "BennyOe/tokyo-night"

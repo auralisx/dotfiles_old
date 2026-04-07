@@ -4,5 +4,5 @@ After=graphical-session.target
 Requisite=graphical-session.target
 
 [Service]
-ExecStart=swww-daemon
+ExecStart=awww-daemon
 Restart=on-failure

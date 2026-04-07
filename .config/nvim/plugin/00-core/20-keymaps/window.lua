@@ -1,6 +1,4 @@
 -- Window, buffer, and tab management shortcuts.
-if vim.g.vscode then return end
-
 -- Focus windows
 vim.keymap.set("n", "<C-h>", "<C-w>h", {
   desc = "Focus left window",
@@ -97,7 +95,6 @@ vim.keymap.set("n", "<leader>wp", "<C-w>p", {
   noremap = true,
   silent = true
 })
--- Alternative: `<C-w>p` is default, but having it documented helps
 
 -- Buffer navigation
 vim.keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", {

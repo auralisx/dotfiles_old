@@ -1,9 +1,46 @@
+-- -----------------------------------------------------------------------------
+-- Global variables and provider settings
+-- -----------------------------------------------------------------------------
+local g = vim.g
+
+-- Indicate that a Nerd Font is available (used by plugins for icons)
+g.have_nerd_font = true
+
+-- Disable unused language providers to improve startup performance
+g.loaded_node_provider = 0
+g.loaded_python3_provider = 0
+g.loaded_perl_provider = 0
+g.loaded_ruby_provider = 0
+
+-- Disable aggressive default Markdown syntax rules
+g.markdown_recommended_style = 0
+
+local disabled_built_ins = {
+  -- "netrw",
+  -- "netrwPlugin",
+  -- "netrwSettings",
+  -- "netrwFileHandlers",
+  "gzip",
+  "zip",
+  "zipPlugin",
+  "tar",
+  "tarPlugin",
+  "getscript",
+  "getscriptPlugin",
+  "vimball",
+  "vimballPlugin",
+  "2html_plugin",
+  "logipat",
+  "rrhelper",
+  "spellfile_plugin",
+  "matchit",
+}
+
+for _, plugin in ipairs(disabled_built_ins) do
+  vim.g["loaded_" .. plugin] = 1
+end
+
 -- Entry point for Neovim configuration.
 -- Core keymap loader. define <leader> and <localleader> keys
-vim.g.mapleader = vim.keycode("<space>")
-vim.g.maplocalleader = vim.keycode("\\")
-
--- Only set colorscheme in real Neovim (not VSCode)
-if not vim.g.vscode then
-    -- vim.cmd.colorscheme("tokyonight-night")
-end
+g.mapleader = vim.keycode("<space>")
+g.maplocalleader = vim.keycode("\\")

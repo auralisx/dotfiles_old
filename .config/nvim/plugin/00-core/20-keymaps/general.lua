@@ -1,5 +1,4 @@
 -- Quality-of-life keymaps that enhance core editing behavior.
-if vim.g.vscode then return end
 
 -- Make `j` and `k` move by display line, not logical line
 -- Useful when lines wrap (e.g., in prose or long code lines)
@@ -14,23 +13,7 @@ vim.keymap.set({
 vim.keymap.set({
   "n",
   "x"
-}, "<Down>", "v:count == 0 ? 'gj' : 'j'", {
-  expr = true,
-  noremap = true,
-  desc = "Move down (by screen line)"
-})
-vim.keymap.set({
-  "n",
-  "x"
 }, "k", "v:count == 0 ? 'gk' : 'k'", {
-  expr = true,
-  noremap = true,
-  desc = "Move up (by screen line)"
-})
-vim.keymap.set({
-  "n",
-  "x"
-}, "<Up>", "v:count == 0 ? 'gk' : 'k'", {
   expr = true,
   noremap = true,
   desc = "Move up (by screen line)"
@@ -47,6 +30,18 @@ vim.keymap.set("v", ">", ">gv", {
   silent = true,
   desc = "Indent right and preserve selection"
 })
+-- Indent in visual mode with Tab
+vim.keymap.set("x", "<Tab>", ">gv", {
+  desc = "Indent right",
+  noremap = true,
+  silent = true
+})
+vim.keymap.set("x", "<S-Tab>", "<gv", {
+  desc = "Indent left",
+  noremap = true,
+  silent = true
+})
+
 
 -- Center screen and re-highlight when jumping to search results
 vim.keymap.set("n", "n", "'Nn'[v:searchforward].'zzzv'", {
@@ -123,27 +118,6 @@ vim.keymap.set("n", "g,", "g,zvzz", {
   noremap = true,
   silent = true,
   desc = "Previous change (centered)"
-})
-
--- Make `^` go to first non-whitespace character on screen line
-vim.keymap.set("n", "^", "g^", {
-  noremap = true,
-  silent = true,
-  desc = "Go to first non-whitespace (screen line)"
-})
-
--- Make `0` go to very first character on screen line
-vim.keymap.set("n", "0", "g0", {
-  noremap = true,
-  silent = true,
-  desc = "Go to beginning of screen line"
-})
-
--- In visual mode, `$` should go to last non-whitespace of screen line
-vim.keymap.set("x", "$", "g_", {
-  noremap = true,
-  silent = true,
-  desc = "Go to last non-whitespace (screen line)"
 })
 
 -- Add undo breakpoints before punctuation

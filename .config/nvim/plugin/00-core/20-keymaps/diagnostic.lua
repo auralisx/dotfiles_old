@@ -1,8 +1,7 @@
 -- Diagnostic and quickfix navigation.
-if vim.g.vscode then return end
 
 -- Open floating diagnostic popup
-vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, {
+vim.keymap.set("n", "<leader>td", vim.diagnostic.open_float, {
   desc = "Show line diagnostics",
   noremap = true,
   silent = true
@@ -61,8 +60,8 @@ end, {
 })
 
 -- Open diagnostic quickfix list
-vim.keymap.set("n", "<leader>q", function() vim.diagnostic.setqflist() end, {
-  desc = "Open diagnostic [Q]uickfix list",
+vim.keymap.set("n", "<leader>qq", function() vim.diagnostic.setqflist() end, {
+  desc = "Open diagnostic Quickfix list",
   noremap = true,
   silent = true
 })
@@ -112,7 +111,7 @@ vim.keymap.set("n", "]L", "<cmd>llast<cr>zvzz", {
 })
 
 -- Clear quickfix and location lists
-vim.keymap.set("n", "<leader>qx", function()
+vim.keymap.set("n", "<leader>qc", function()
   vim.cmd.cexpr({})
   vim.cmd.lexpr({})
 end, {
@@ -122,7 +121,7 @@ end, {
 })
 
 -- Close both quickfix and location lists
-vim.keymap.set("n", "<leader>qc", function()
+vim.keymap.set("n", "<leader>qx", function()
   vim.cmd.cclose()
   vim.cmd.lclose()
 end, {

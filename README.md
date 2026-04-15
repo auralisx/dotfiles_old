@@ -57,6 +57,12 @@ Example:
 
 ### Waybar
 
+**Vertical Bar**: Vertical Bar for Niri just because workspaces uses vertical system.
+![Vertical Bar](https://github.com/auralisx/dotfiles/blob/main/screenshots/vertical-bar.png)
+
+> [!NOTE]
+> Top Bottom bar is my old waybar config that I used to use in Hyprland and never changed
+
 **Top Bar**: widgets without useful interaction, just shows useful informations.
 ![Top Bar](https://github.com/auralisx/dotfiles/blob/main/screenshots/topbar.png)
 

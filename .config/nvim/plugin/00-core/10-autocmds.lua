@@ -115,3 +115,18 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     vim.diagnostic.enable(false, { bufnr = 0 })
   end,
 })
+
+-- Vim Pack
+local pack_group = augroup("package_manager")
+
+-- Update treesitter when nvim-treesitter is updated
+vim.api.nvim_create_autocmd('PackChanged', {
+  group = pack_group,
+  callback = function(ev)
+    local name, kind = ev.data.spec.name, ev.data.kind
+    if name == 'nvim-treesitter' and kind == 'update' then
+      if not ev.data.active then vim.cmd.packadd('nvim-treesitter') end
+      vim.cmd('TSUpdate')
+    end
+  end
+})

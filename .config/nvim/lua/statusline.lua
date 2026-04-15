@@ -59,21 +59,6 @@ local function get_size()
   return M.hl("Blue", string.format("[%.1f%s]", size, units[unit]))
 end
 
-local function get_diagnostics()
-  local levels = {
-    { s = vim.diagnostic.severity.ERROR, h = "Red", i = " " },
-    { s = vim.diagnostic.severity.WARN, h = "Yellow", i = " " },
-    { s = vim.diagnostic.severity.INFO, h = "Green", i = " " },
-    { s = vim.diagnostic.severity.HINT, h = "Purple", i = " " }
-  }
-  local parts = {}
-  for _, diagnostic in ipairs(levels) do
-    local n = #vim.diagnostic.get(0, { severity = diagnostic.s })
-    if n > 0 then table.insert(parts, string.format("%%#%s#%s%d%%*", diagnostic.h, diagnostic.i, n)) end
-  end
-  return #parts > 0 and table.concat(parts, " ") or ""
-end
-
 M.external_left = {}
 M.external_right = {}
 
@@ -84,6 +69,7 @@ function M.render()
     get_size(),
     M.hl("Fg", "󰈙 %f"), -- %f is relative path
     "%m%r", -- Modified/Read-only flags
+    vim.diagnostic.status(),
   }
   for _, func in pairs(M.external_left) do
     local val = func()
@@ -92,7 +78,7 @@ function M.render()
 
   -- RIGHT: Metadata & Location
   local right = {
-    get_diagnostics(),
+    vim.lsp.status(),
     get_lsp(),
     M.hl("Yellow", "%y"), -- Filetype
     M.hl("Purple", "%l:%c"),
@@ -122,6 +108,7 @@ function M.setup()
 
   -- Create global bridge for the statusline string
   _G.CoreStatusline = M.render
+  vim.g.qf_disable_statusline = 1 -- Disable built-in quickfix statusline
   vim.opt.statusline = "%!v:lua.CoreStatusline()"
 
   -- Refresh more frequently for diagnostics and mode changes

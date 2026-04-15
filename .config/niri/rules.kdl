@@ -25,10 +25,6 @@ workspace "entertainment" {
   open-on-output "HDMI-A-1"
 }
 
-workspace "ai" {
-  open-on-output "HDMI-A-1"
-}
-
 window-rule {
     match app-id="^brave-browser$"
     match app-id=r#"firefox$"#

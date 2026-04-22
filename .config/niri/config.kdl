@@ -16,6 +16,7 @@ binds {
 
     Mod+Shift+Ctrl+R hotkey-overlay-title="<b>System: </b> Reboot" repeat=false { spawn "systemctl" "reboot"; }
     Mod+Shift+Ctrl+X hotkey-overlay-title="<b>System: </b> Shutdown" repeat=false { spawn "systemctl" "poweroff" "-i"; }
+    Mod+Shift+Ctrl+B hotkey-overlay-title="<b>System: </b> Toggle Waybar" repeat=false { spawn "pkill" "-USR1" "waybar"; }
 
     // Screenshot
     Print hotkey-overlay-title="<b>Screenshot: </b> Region" { screenshot; }

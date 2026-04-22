@@ -42,7 +42,7 @@ Example:
 ### Desktop
 ![Desktop](https://github.com/auralisx/dotfiles/blob/main/screenshots/desktop-with-vertical-bar.png)
 
-![Overview](https://github.com/auralisx/dotfiles/blob/main/screenshots/overview-vertical.png.png)
+![Overview](https://github.com/auralisx/dotfiles/blob/main/screenshots/overview-vertical.png)
 
 ### Nvim + Zellij
 ![Nvim-Zellij](https://github.com/auralisx/dotfiles/blob/main/screenshots/nvim-zellij.png)

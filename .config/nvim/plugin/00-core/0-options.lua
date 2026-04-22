@@ -71,7 +71,6 @@ o.backup = false      -- Disable backup files
 o.writebackup = false -- Disable backup before write
 o.undofile = true     -- Enable persistent undo
 
-o.updatetime = 200    -- Interval for saving swap/undo and CursorHold events
 opt.sessionoptions = {
   "buffers",
   "curdir",
@@ -91,30 +90,6 @@ o.mouse = "a"                    -- Enable mouse in all modes
 o.backspace = "indent,eol,start" -- Backspace works in insert mode
 opt.iskeyword:append("-")        -- Treat dash as part of a word
 opt.path:append("**")            -- Search in subdirectories with commands like :find
-
--- Fix common command-line typos
-vim.cmd([[
-  cnoreabbrev W! w!
-  cnoreabbrev W1 w!
-  cnoreabbrev w1 w!
-  cnoreabbrev Q! q!
-  cnoreabbrev Q1 q!
-  cnoreabbrev q1 q!
-  cnoreabbrev Qa! qa!
-  cnoreabbrev Qall! qall!
-  cnoreabbrev Wa wa
-  cnoreabbrev Wq wq
-  cnoreabbrev wQ wq
-  cnoreabbrev WQ wq
-  cnoreabbrev wq1 wq!
-  cnoreabbrev Wq1 wq!
-  cnoreabbrev wQ1 wq!
-  cnoreabbrev WQ1 wq!
-  cnoreabbrev W w
-  cnoreabbrev Q q
-  cnoreabbrev Qa qa
-  cnoreabbrev Qall qall
-]])
 
 -- -----------------------------------------------------------------------------
 -- Window and split behavior

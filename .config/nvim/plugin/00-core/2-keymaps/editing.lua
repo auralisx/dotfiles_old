@@ -7,6 +7,7 @@ vim.keymap.set("n", "<leader>nf", "<cmd>enew<cr>", {
 
 -- Copy, cut, paste using system clipboard
 vim.keymap.set({
+  "n",
   "x"
 }, "<C-c>", '"+y', {
   desc = "Copy to clipboard",
@@ -14,8 +15,32 @@ vim.keymap.set({
 })
 vim.keymap.set({
   "n",
-  "x"
 }, "<A-v>", '"+p', {
+  desc = "Paste from clipboard",
+  noremap = true
+})
+vim.keymap.set({
+  "x",
+}, "<A-v>", '"+P', {
+  desc = "Paste from clipboard",
+  noremap = true
+})
+vim.keymap.set({
+  "n",
+  "x"
+}, "gy", '"+y', {
+  desc = "Copy to clipboard",
+  noremap = true
+})
+vim.keymap.set({
+  "n",
+}, "gp", '"+p', {
+  desc = "Paste from clipboard",
+  noremap = true
+})
+vim.keymap.set({
+  "x",
+}, "gp", '"+P', {
   desc = "Paste from clipboard",
   noremap = true
 })
@@ -86,6 +111,15 @@ vim.keymap.set({
   desc = "Delete without yank",
   noremap = true
 })
+
+-- Reselect latest changed, put, or yanked text
+vim.keymap.set('n', 'gV', '"g`[" . strpart(getregtype(), 0, 1) . "g`]"',
+  { expr = true, replace_keycodes = false, desc = 'Visually select changed text', noremap = true })
+
+-- Search inside visually highlighted text. Use `silent = false` for it to
+-- make effect immediately.
+vim.keymap.set('x', 'g/', '<esc>/\\%V', { silent = false, desc = 'Search inside visual selection', noremap = true })
+
 
 -- Paste over selection without overwriting yank register
 vim.keymap.set("x", "p", 'p:let @+=@0<CR>:let @"=@0<CR>', {
@@ -253,43 +287,6 @@ vim.keymap.set("i", "<C-z>", "<C-o>u", {
 vim.keymap.set("i", "<C-v>", "<C-o>\"+p", {
   desc = "Paste from clipboard",
   noremap = true
-})
-
--- =============================================================================
--- Command Line
--- =============================================================================
-
--- Better navigation in command mode
-vim.keymap.set("c", "<C-h>", "<Home>", {
-  desc = "Go to start of command line",
-  noremap = true
-})
-vim.keymap.set("c", "<C-l>", "<End>", {
-  desc = "Go to end of command line",
-  noremap = true
-})
-vim.keymap.set("c", "<C-b>", "<Left>", {
-  desc = "Move left",
-  noremap = true
-})
-vim.keymap.set("c", "<C-f>", "<Right>", {
-  desc = "Move right",
-  noremap = true
-})
-
--- =============================================================================
--- Plugin-Dependent Mappings
--- =============================================================================
-
--- Open notes (Snacks.nvim or similar)
-vim.keymap.set("n", "<leader>on", function()
-  Snacks.picker.files({
-    cwd = vim.fn.expand("~/git_repos/notes")
-  })
-end, {
-  desc = "Open notes",
-  noremap = true,
-  silent = true
 })
 
 -- Toggle case of word

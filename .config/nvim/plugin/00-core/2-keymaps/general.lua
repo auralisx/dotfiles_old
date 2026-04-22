@@ -30,18 +30,6 @@ vim.keymap.set("v", ">", ">gv", {
   silent = true,
   desc = "Indent right and preserve selection"
 })
--- Indent in visual mode with Tab
-vim.keymap.set("x", "<Tab>", ">gv", {
-  desc = "Indent right",
-  noremap = true,
-  silent = true
-})
-vim.keymap.set("x", "<S-Tab>", "<gv", {
-  desc = "Indent left",
-  noremap = true,
-  silent = true
-})
-
 
 -- Center screen and re-highlight when jumping to search results
 vim.keymap.set("n", "n", "'Nn'[v:searchforward].'zzzv'", {

@@ -1,6 +1,5 @@
--- -----------------------------------------------------------------------------
--- Global variables and provider settings
--- -----------------------------------------------------------------------------
+vim.loader.enable()
+
 local g = vim.g
 
 -- Indicate that a Nerd Font is available (used by plugins for icons)
@@ -16,22 +15,23 @@ g.loaded_ruby_provider = 0
 g.markdown_recommended_style = 0
 
 local disabled_built_ins = {
-  -- "netrw",
-  -- "netrwPlugin",
-  -- "netrwSettings",
-  -- "netrwFileHandlers",
+  "netrw",
+  "netrwPlugin",
+  "netrwSettings",
+  "netrwFileHandlers",
   "gzip",
   "zip",
   "zipPlugin",
   "tar",
   "tarPlugin",
+  "tutor",
   "getscript",
   "getscriptPlugin",
   "vimball",
   "vimballPlugin",
-  "2html_plugin",
   "logipat",
   "rrhelper",
+  "rplugin",
   "spellfile_plugin",
   "matchit",
 }
@@ -44,3 +44,16 @@ end
 -- Core keymap loader. define <leader> and <localleader> keys
 g.mapleader = vim.keycode("<space>")
 g.maplocalleader = vim.keycode("\\")
+
+-- Enable the new UI
+require('vim._core.ui2').enable({})
+
+_G.Config = {}
+vim.pack.add({ 'https://github.com/nvim-mini/mini.misc' })
+
+local misc = require('mini.misc')
+Config.now = function(f) misc.safely('now', f) end
+Config.later = function(f) misc.safely('later', f) end
+Config.now_if_args = vim.fn.argc(-1) > 0 and Config.now or Config.later
+Config.on_event = function(ev, f) misc.safely('event:' .. ev, f) end
+Config.on_filetype = function(ft, f) misc.safely('filetype:' .. ft, f) end

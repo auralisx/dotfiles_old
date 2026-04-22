@@ -10,10 +10,18 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertLeave" }, {
   group = file_group,
   callback = function()
     if vim.bo.modified and vim.bo.buftype == "" and vim.fn.expand("%") ~= "" then
-      vim.cmd("silent! update")
+      vim.cmd("silent! update | redraw")
     end
   end,
   desc = "Autosave on focus change or exiting insert mode",
+})
+
+-- open help in vertical split
+vim.api.nvim_create_autocmd("FileType", {
+  group = file_group,
+  pattern = "help",
+  command = "wincmd L",
+  desc = "Open help in vertical split",
 })
 
 -- Return to last edit position
@@ -104,6 +112,17 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
 })
 
+-- Undotree settings
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "nvim-undotree",
+  group = special_group,
+  callback = function()
+    vim.wo.number = false
+    vim.wo.relativenumber = false
+    vim.keymap.set("n", "q", ":q<CR>", { buffer = true })
+  end,
+})
+
 -- LANGUAGE SPECIFIC (FileType)
 local lang_group = augroup("language_settings")
 
@@ -116,17 +135,28 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   end,
 })
 
+-- syntax highlighting for dotenv files
+vim.api.nvim_create_autocmd("BufRead", {
+  group = lang_group,
+  pattern = { ".env", ".env.*" },
+  callback = function()
+    vim.bo.filetype = "dosini"
+  end,
+})
+
 -- Vim Pack
 local pack_group = augroup("package_manager")
 
--- Update treesitter when nvim-treesitter is updated
-vim.api.nvim_create_autocmd('PackChanged', {
-  group = pack_group,
-  callback = function(ev)
-    local name, kind = ev.data.spec.name, ev.data.kind
-    if name == 'nvim-treesitter' and kind == 'update' then
-      if not ev.data.active then vim.cmd.packadd('nvim-treesitter') end
-      vim.cmd('TSUpdate')
-    end
+-- remove plugins from disk that are no longer in vim.pack.add() specs
+vim.api.nvim_create_user_command("PackClean", function()
+  local inactive = vim.iter(vim.pack.get())
+      :filter(function(x) return not x.active end)
+      :map(function(x) return x.spec.name end)
+      :totable()
+  if #inactive == 0 then
+    vim.notify("No inactive plugins to remove", vim.log.levels.INFO)
+    return
   end
-})
+  vim.pack.del(inactive)
+  vim.notify("Removed: " .. table.concat(inactive, ", "), vim.log.levels.INFO)
+end, { desc = "Remove plugins not in vim.pack.add() specs" })

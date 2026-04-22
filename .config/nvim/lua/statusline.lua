@@ -66,10 +66,10 @@ function M.render()
   -- LEFT: Project & File Info
   local left = {
     -- get_git(),
-    get_size(),
     M.hl("Fg", "󰈙 %f"), -- %f is relative path
-    "%m%r", -- Modified/Read-only flags
+    M.hl("Red", "%m%r"), -- Modified/Read-only flags
     vim.diagnostic.status(),
+    vim.ui.progress_status()
   }
   for _, func in pairs(M.external_left) do
     local val = func()
@@ -78,11 +78,12 @@ function M.render()
 
   -- RIGHT: Metadata & Location
   local right = {
-    vim.lsp.status(),
     get_lsp(),
+    vim.lsp.status(),
     M.hl("Yellow", "%y"), -- Filetype
+    get_size(),
     M.hl("Purple", "%l:%c"),
-    M.hl("Cyan", "%P"),   -- Percentage
+    M.hl("Cyan", "%P"), -- Percentage
   }
 
   -- Helper to filter empty strings and join

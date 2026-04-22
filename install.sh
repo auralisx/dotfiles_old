@@ -21,11 +21,11 @@ PACMAN_PACKAGES=(
     # Personal packages
     firefox-developer-edition vivaldi
     hyprpicker
-    neovim zed biome
+    neovim zed biome tree-sitter-cli
     copyq satty obs-studio awww
     ghostty
     sudo-rs
-    fish exa fzf ripgrep zoxide starship lazygit zellij btop bat tree bottom
+    fish exa fzf ripgrep zoxide starship lazygit zellij bat tree bottom
     yazi 7zip jq resvg fd imagemagick poppler
     mpv
     tlp

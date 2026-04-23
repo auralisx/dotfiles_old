@@ -10,7 +10,3 @@ run  = "git"
 id   = "git"
 name = "*/"
 run  = "git"
-
-[[plugin.prepend_previewers]]
-name = "*"
-run  = 'piper -- echo "$1"'

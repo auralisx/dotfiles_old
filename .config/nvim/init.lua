@@ -16,24 +16,10 @@ g.markdown_recommended_style = 0
 
 local disabled_built_ins = {
   "netrw",
-  "netrwPlugin",
-  "netrwSettings",
-  "netrwFileHandlers",
   "gzip",
   "zip",
-  "zipPlugin",
   "tar",
-  "tarPlugin",
   "tutor",
-  "getscript",
-  "getscriptPlugin",
-  "vimball",
-  "vimballPlugin",
-  "logipat",
-  "rrhelper",
-  "rplugin",
-  "spellfile_plugin",
-  "matchit",
 }
 
 for _, plugin in ipairs(disabled_built_ins) do

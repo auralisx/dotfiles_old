@@ -4,7 +4,9 @@ Config.now_if_args(function()
     'https://github.com/nvim-lua/plenary.nvim',
     'https://github.com/folke/snacks.nvim'
   })
-  require('yazi').setup()
+  require('yazi').setup({
+    open_for_directories = true,
+  })
   require('snacks').setup({
     picker = { enabled = true },
     lazygit = { enabled = true },
@@ -16,6 +18,8 @@ Config.now_if_args(function()
     indent = { enabled = true },
   })
   -- Yazi
+  vim.keymap.set('n', '<leader>ty', '<cmd>Yazi toggle<cr>', { desc = "Resume the last yazi session" })
+  vim.keymap.set('n', '<leader>tc', '<cmd>Yazi cwd<cr>', { desc = "Open Working Directory" })
   vim.keymap.set('n', '<leader>te', '<cmd>Yazi<cr>', { desc = "File Explore [Yazi]" })
 
   vim.keymap.set('n', '<leader><space>', function() Snacks.picker.smart() end, { desc = "Smart Find Files" })

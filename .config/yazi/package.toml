@@ -1,12 +1,7 @@
 [[plugin.deps]]
-use = "yazi-rs/plugins:vcs-files"
-rev = "e84f4fe"
-hash = "f6e6a829c6dc6c900a75bebe422a5c33"
-
-[[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "e84f4fe"
-hash = "26db011a778f261d730d4f5f8bf24b3f"
+rev = "ac82af3"
+hash = "6849444b7c2df08eace83f3f86fb55a3"
 
 [[plugin.deps]]
 use = "atareao/convert"

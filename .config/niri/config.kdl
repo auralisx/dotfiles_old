@@ -3,6 +3,7 @@ include "layout.kdl"
 include "rules.kdl"
 include "recent-windows.kdl"
 include "misc.kdl"
+include "animations.kdl"
 
 binds {
     // Most actions that you can bind here can also be invoked programmatically with

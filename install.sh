@@ -14,8 +14,7 @@ PACMAN_PACKAGES=(
     # System packages
     niri hypridle hyprlock xdg-desktop-portal-gtk xdg-desktop-portal-gnome polkit-gnome gnome-keyring gvfs-mtp xwayland-satellite
     pipewire pipewire-alsa pipewire-jack pipewire-pulse pipewire-zeroconf wireplumber qpwgraph pavucontrol sof-firmware
-    waybar swaync bluez bluez-utils blueman networkmanager network-manager-applet brightnessctl fuzzel reflector
-    wl-clipboard grim slurp
+    waybar swaync bluez bluez-utils blueman networkmanager network-manager-applet brightnessctl fuzzel reflector wl-clipboard
     ttf-firacode-nerd woff2-font-awesome noto-fonts-emoji
 
     # Personal packages

@@ -23,8 +23,21 @@ binds {
     Print hotkey-overlay-title="<b>Screenshot: </b> Region" { screenshot; }
     Shift+Print hotkey-overlay-title="<b>Screenshot: </b> Screen" { screenshot-screen; }
     Ctrl+Print hotkey-overlay-title="<b>Screenshot: </b> Window" { screenshot-window; }
-    Mod+Print allow-when-locked=true hotkey-overlay-title="<b>Screenshot With Annotation: </b> Region" { spawn "fish" "-c" "grim -g \"$(slurp -c '#bb9af7')\" -t ppm - | satty --filename - --fullscreen --output-filename ~/Pictures/satty-$(date '+%Y%m%d-%H:%M:%S').png"; }
-    Mod+Shift+Print hotkey-overlay-title="<b>Screenshot With Annotation: </b> Screen" { spawn "fish" "-c" "grim -g \"$(slurp -o -r -c '#bb9af7')\" -t ppm - | satty --filename - --fullscreen --output-filename ~/Pictures/satty-$(date '+%Y%m%d-%H:%M:%S').png"; }
+    // Mod+Print allow-when-locked=true hotkey-overlay-title="<b>Screenshot With Annotation: </b> Region" { spawn "fish" "-c" "grim -g \"$(slurp -c '#bb9af7')\" -t ppm - | satty --filename - --fullscreen --output-filename ~/Pictures/satty-$(date '+%Y%m%d-%H:%M:%S').png"; }
+    // Mod+Shift+Print hotkey-overlay-title="<b>Screenshot With Annotation: </b> Screen" { spawn "fish" "-c" "grim -g \"$(slurp -o -r -c '#bb9af7')\" -t ppm - | satty --filename - --fullscreen --output-filename ~/Pictures/satty-$(date '+%Y%m%d-%H:%M:%S').png"; }
+    Mod+Print hotkey-overlay-title="<b>Annotate Recent Screenshot</b>" {
+      spawn-sh "
+          file=$(ls -t ~/Pictures/Screenshots/*.png | head -n 1) &&
+          [ -n \"$file\" ] &&
+          satty --filename \"$file\"
+      ";
+    }
+    Mod+Alt+Print hotkey-overlay-title="<b>Select Screenshot to Annotate</b>" {
+      spawn-sh "
+          FILE=$(ls -t ~/Pictures/Screenshots/*.png | fuzzel --dmenu --prompt='Select to Annotate: ' --lines=15 --width=80) &&
+          [ -n \"$FILE\" ] && satty --filename \"$FILE\"
+      ";
+    }
 
     // Primary Applications
     Mod+Return hotkey-overlay-title="<b>Open a Terminal: </b> Ghostty" {spawn "ghostty"; }

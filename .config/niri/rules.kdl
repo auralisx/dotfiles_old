@@ -54,7 +54,7 @@ window-rule {
 }
 
 window-rule {
-    match app-id="^gimp"
+    match app-id="gimp"
 
     open-maximized true
     open-focused true

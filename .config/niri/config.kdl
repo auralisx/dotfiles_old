@@ -39,6 +39,30 @@ binds {
       ";
     }
 
+    Mod+Alt+W hotkey-overlay-title="<b>Wallpaper: Random</b>" {
+      spawn-sh "
+        file=$(ls ~/dotfiles/wallpapers | shuf -n 1) &&
+        [ -n \"$file\" ] &&
+        awww img  -o eDP-1 ~/dotfiles/wallpapers/$file --transition-type random
+        ";
+    }
+
+    Mod+Alt+1 hotkey-overlay-title="<b>Wallpaper: </b>Laptop Monitor" {
+      spawn-sh "
+        file=$(ls ~/dotfiles/wallpapers | fuzzel --dmenu -p 'Wallpaper For Monitor DP-1: ' --width=60) &&
+        [ -n \"$file\" ] &&
+        awww img  -o eDP-1 ~/dotfiles/wallpapers/$file --transition-type random
+        ";
+    }
+
+    Mod+ALt+2 hotkey-overlay-title="<b>Wallpaper: </b>Secondary Monitor" {
+      spawn-sh "
+        file=$(ls ~/dotfiles/wallpapers | fuzzel --dmenu -p 'Wallpaper For Monitor HDMI-A-1: ' --width=60) &&
+        [ -n \"$file\" ] &&
+        awww img -o HDMI-A-1 ~/dotfiles/wallpapers/$file --transition-type random
+        ";
+    }
+
     // Primary Applications
     Mod+Return hotkey-overlay-title="<b>Open a Terminal: </b> Ghostty" {spawn "ghostty"; }
     Mod+Semicolon hotkey-overlay-title="<b>Run an Application: </b> Fuzzel" { spawn "fuzzel"; }

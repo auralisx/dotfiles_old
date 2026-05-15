@@ -73,18 +73,12 @@ if command -q sudo-rs
     alias sudo='sudo-rs '
 end
 
-
 #pacman
 function cleanup --description 'Remove orphaned packages'
     sudo pacman -Rns (pacman -Qtdq)
 end
 
 alias unlock='sudo rm /var/lib/pacman/db.lck'    # remove pacman lock
-
-# Colorize grep output (good for log files)
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
 
 # Color output of ip
 alias ip="ip -color"

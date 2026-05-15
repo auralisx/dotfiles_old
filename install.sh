@@ -24,7 +24,7 @@ PACMAN_PACKAGES=(
     copyq satty obs-studio awww
     ghostty
     sudo-rs
-    fish exa fzf ripgrep zoxide starship lazygit zellij bat tree bottom
+    fish exa fzf ripgrep zoxide starship lazygit zellij bat bottom ast-grep
     yazi 7zip jq resvg fd imagemagick poppler
     mpv
     tlp
@@ -38,7 +38,6 @@ PACMAN_PACKAGES=(
 # AUR packages
 AUR_PACKAGES=(
     beautyline
-    waypaper-git
 )
 
 # ───────────────────────────────────────────────────────────

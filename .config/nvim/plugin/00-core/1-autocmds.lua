@@ -1,5 +1,5 @@
 local function augroup(name)
-  return vim.api.nvim_create_augroup("SK_" .. name, { clear = true })
+	return vim.api.nvim_create_augroup("SK_" .. name, { clear = true })
 end
 
 -- BUFFER & FILE BEHAVIOR
@@ -7,44 +7,50 @@ local file_group = augroup("file_behavior")
 
 -- Autosave on specific events (Zed-style)
 vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertLeave" }, {
-  group = file_group,
-  callback = function()
-    if vim.bo.modified and vim.bo.buftype == "" and vim.fn.expand("%") ~= "" then
-      vim.cmd("silent! update | redraw")
-    end
-  end,
-  desc = "Autosave on focus change or exiting insert mode",
+	group = file_group,
+	callback = function()
+		if vim.bo.modified and vim.bo.buftype == "" and vim.fn.expand("%") ~= "" then
+			vim.cmd("silent! update | redraw")
+		end
+	end,
+	desc = "Autosave on focus change or exiting insert mode",
 })
 
 -- open help in vertical split
 vim.api.nvim_create_autocmd("FileType", {
-  group = file_group,
-  pattern = "help",
-  command = "wincmd L",
-  desc = "Open help in vertical split",
+	group = file_group,
+	pattern = "help",
+	command = "wincmd L",
+	desc = "Open help in vertical split",
 })
 
 -- Return to last edit position
 vim.api.nvim_create_autocmd("BufReadPost", {
-  group = file_group,
-  callback = function()
-    local mark = vim.api.nvim_buf_get_mark(0, '"')
-    local lcount = vim.api.nvim_buf_line_count(0)
-    if mark[1] > 0 and mark[1] <= lcount then
-      pcall(vim.api.nvim_win_set_cursor, 0, mark)
-    end
-  end,
+	group = file_group,
+	callback = function(args)
+		local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
+		local line_count = vim.api.nvim_buf_line_count(args.buf)
+		if mark[1] > 0 and mark[1] <= line_count then
+			vim.api.nvim_win_set_cursor(0, mark)
+			-- defer centering slightly so it's applied after render
+			vim.schedule(function()
+				vim.cmd("normal! zz")
+			end)
+		end
+	end,
 })
 
 -- Auto-create parent directories
 vim.api.nvim_create_autocmd("BufWritePre", {
-  group = file_group,
-  callback = function(event)
-    if event.match:match("^%w%w+:[\\/][\\/]") then return end
-    local file = vim.uv.fs_realpath(event.match) or event.match
-    local dir = vim.fn.fnamemodify(file, ":p:h")
-    vim.fn.mkdir(dir, "p")
-  end,
+	group = file_group,
+	callback = function(event)
+		if event.match:match("^%w%w+:[\\/][\\/]") then
+			return
+		end
+		local file = vim.uv.fs_realpath(event.match) or event.match
+		local dir = vim.fn.fnamemodify(file, ":p:h")
+		vim.fn.mkdir(dir, "p")
+	end,
 })
 
 -- UI & APPEARANCE
@@ -52,37 +58,39 @@ local ui_group = augroup("ui_tweaks")
 
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
-  group = ui_group,
-  callback = function() vim.highlight.on_yank({ timeout = 200 }) end,
+	group = ui_group,
+	callback = function()
+		vim.highlight.on_yank()
+	end,
 })
 
 -- Resize splits evenly on terminal resize
 vim.api.nvim_create_autocmd("VimResized", {
-  group = ui_group,
-  callback = function()
-    local current_tab = vim.fn.tabpagenr()
-    vim.cmd("tabdo wincmd =")
-    vim.cmd("tabnext " .. current_tab)
-  end,
+	group = ui_group,
+	callback = function()
+		local current_tab = vim.fn.tabpagenr()
+		vim.cmd("tabdo wincmd =")
+		vim.cmd("tabnext " .. current_tab)
+	end,
 })
 
 -- Dynamic Relative Numbers (Zed-style)
 -- Shows relative numbers in normal mode, absolute in insert/unfocused
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
-  group = ui_group,
-  callback = function()
-    if vim.wo.number and vim.api.nvim_get_mode().mode ~= "i" then
-      vim.wo.relativenumber = true
-    end
-  end,
+	group = ui_group,
+	callback = function()
+		if vim.wo.number and vim.api.nvim_get_mode().mode ~= "i" then
+			vim.wo.relativenumber = true
+		end
+	end,
 })
 vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
-  group = ui_group,
-  callback = function()
-    if vim.wo.number then
-      vim.wo.relativenumber = false
-    end
-  end,
+	group = ui_group,
+	callback = function()
+		if vim.wo.number then
+			vim.wo.relativenumber = false
+		end
+	end,
 })
 
 -- TERMINAL & SPECIAL BUFFERS
@@ -90,37 +98,37 @@ local special_group = augroup("special_buffers")
 
 -- Better Terminal defaults
 vim.api.nvim_create_autocmd("TermOpen", {
-  group = special_group,
-  callback = function()
-    vim.opt_local.number = false
-    vim.opt_local.relativenumber = false
-    vim.cmd("startinsert") -- Auto-enter insert mode
-  end,
+	group = special_group,
+	callback = function()
+		vim.opt_local.number = false
+		vim.opt_local.relativenumber = false
+		vim.cmd("startinsert") -- Auto-enter insert mode
+	end,
 })
 
 -- Auto-close Neovim if only special windows are left (Netrw, Quickfix, Help)
 vim.api.nvim_create_autocmd("BufEnter", {
-  group = special_group,
-  callback = function()
-    if #vim.api.nvim_list_wins() == 1 then
-      local ft = vim.bo.filetype
-      local bt = vim.bo.buftype
-      if ft == "netrw" or ft == "help" or bt == "quickfix" then
-        vim.cmd("quit")
-      end
-    end
-  end,
+	group = special_group,
+	callback = function()
+		if #vim.api.nvim_list_wins() == 1 then
+			local ft = vim.bo.filetype
+			local bt = vim.bo.buftype
+			if ft == "netrw" or ft == "help" or bt == "quickfix" then
+				vim.cmd("quit")
+			end
+		end
+	end,
 })
 
 -- Undotree settings
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "nvim-undotree",
-  group = special_group,
-  callback = function()
-    vim.wo.number = false
-    vim.wo.relativenumber = false
-    vim.keymap.set("n", "q", ":q<CR>", { buffer = true })
-  end,
+	pattern = "nvim-undotree",
+	group = special_group,
+	callback = function()
+		vim.wo.number = false
+		vim.wo.relativenumber = false
+		vim.keymap.set("n", "q", ":q<CR>", { buffer = true })
+	end,
 })
 
 -- LANGUAGE SPECIFIC (FileType)
@@ -128,20 +136,20 @@ local lang_group = augroup("language_settings")
 
 -- Disable diagnostics in node_modules
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  group = lang_group,
-  pattern = "*/node_modules/*",
-  callback = function()
-    vim.diagnostic.enable(false, { bufnr = 0 })
-  end,
+	group = lang_group,
+	pattern = "*/node_modules/*",
+	callback = function()
+		vim.diagnostic.enable(false, { bufnr = 0 })
+	end,
 })
 
 -- syntax highlighting for dotenv files
 vim.api.nvim_create_autocmd("BufRead", {
-  group = lang_group,
-  pattern = { ".env", ".env.*" },
-  callback = function()
-    vim.bo.filetype = "dosini"
-  end,
+	group = lang_group,
+	pattern = { ".env", ".env.*" },
+	callback = function()
+		vim.bo.filetype = "dosini"
+	end,
 })
 
 -- Vim Pack
@@ -149,14 +157,18 @@ local pack_group = augroup("package_manager")
 
 -- remove plugins from disk that are no longer in vim.pack.add() specs
 vim.api.nvim_create_user_command("PackClean", function()
-  local inactive = vim.iter(vim.pack.get())
-      :filter(function(x) return not x.active end)
-      :map(function(x) return x.spec.name end)
-      :totable()
-  if #inactive == 0 then
-    vim.notify("No inactive plugins to remove", vim.log.levels.INFO)
-    return
-  end
-  vim.pack.del(inactive)
-  vim.notify("Removed: " .. table.concat(inactive, ", "), vim.log.levels.INFO)
+	local inactive = vim.iter(vim.pack.get())
+		:filter(function(x)
+			return not x.active
+		end)
+		:map(function(x)
+			return x.spec.name
+		end)
+		:totable()
+	if #inactive == 0 then
+		vim.notify("No inactive plugins to remove", vim.log.levels.INFO)
+		return
+	end
+	vim.pack.del(inactive)
+	vim.notify("Removed: " .. table.concat(inactive, ", "), vim.log.levels.INFO)
 end, { desc = "Remove plugins not in vim.pack.add() specs" })

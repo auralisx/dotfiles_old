@@ -32,10 +32,10 @@ function M.hl(group, text)
   return string.format("%%#SK%s#%s%%*", group, text)
 end
 
-local function get_git()
-  local branch = vim.b.gitsigns_head or ""
-  return branch ~= "" and M.hl("Orange", " " .. branch) or ""
-end
+-- local function get_git()
+--   local branch = vim.b.gitsigns_head or ""
+--   return branch ~= "" and M.hl("Orange", " " .. branch) or ""
+-- end
 
 local function get_lsp()
   local clients = vim.lsp.get_clients({ bufnr = 0 })

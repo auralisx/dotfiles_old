@@ -15,15 +15,15 @@ g.loaded_ruby_provider = 0
 g.markdown_recommended_style = 0
 
 local disabled_built_ins = {
-  "netrw",
-  "gzip",
-  "zip",
-  "tar",
-  "tutor",
+	"netrw",
+	"gzip",
+	"zip",
+	"tar",
+	"tutor",
 }
 
 for _, plugin in ipairs(disabled_built_ins) do
-  vim.g["loaded_" .. plugin] = 1
+	vim.g["loaded_" .. plugin] = 1
 end
 
 -- Entry point for Neovim configuration.
@@ -32,14 +32,26 @@ g.mapleader = vim.keycode("<space>")
 g.maplocalleader = vim.keycode("\\")
 
 -- Enable the new UI
-require('vim._core.ui2').enable({})
+require("vim._core.ui2").enable({})
+
+-- inline diagnostics
+vim.diagnostic.config({ virtual_text = true })
+
 
 _G.Config = {}
-vim.pack.add({ 'https://github.com/nvim-mini/mini.misc' })
+vim.pack.add({ "https://github.com/nvim-mini/mini.misc" })
 
-local misc = require('mini.misc')
-Config.now = function(f) misc.safely('now', f) end
-Config.later = function(f) misc.safely('later', f) end
+local misc = require("mini.misc")
+Config.now = function(f)
+	misc.safely("now", f)
+end
+Config.later = function(f)
+	misc.safely("later", f)
+end
 Config.now_if_args = vim.fn.argc(-1) > 0 and Config.now or Config.later
-Config.on_event = function(ev, f) misc.safely('event:' .. ev, f) end
-Config.on_filetype = function(ft, f) misc.safely('filetype:' .. ft, f) end
+Config.on_event = function(ev, f)
+	misc.safely("event:" .. ev, f)
+end
+Config.on_filetype = function(ft, f)
+	misc.safely("filetype:" .. ft, f)
+end

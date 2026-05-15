@@ -18,8 +18,8 @@ recent-windows {
 
     binds {
         Mod+Tab         { next-window scope="all"; }
-        Mod+Shift+Tab   { previous-window scope="all"; }
-        Mod+grave       { next-window scope="workspace"; }
-        Mod+Shift+grave { previous-window scope="workspace"; }
+        Mod+Shift+Tab   { previous-window scope="output"; }
+        Mod+grave       { next-window filter="app-id"; }
+        Mod+Shift+grave { previous-window filter="app-id" scope="output"; }
     }
 }

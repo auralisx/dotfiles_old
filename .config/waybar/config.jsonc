@@ -2,8 +2,8 @@
   "layer": "top",
   "position": "right",
   "spacing": 16,
-  "margin-top": 5,
-  "margin-bottom": 5,
+  // "margin-top": 5,
+  // "margin-bottom": 5,
   "reload_style_on_change": true,
   "modules-left": [
     "custom/notification",

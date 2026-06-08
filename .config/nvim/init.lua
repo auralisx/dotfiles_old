@@ -31,12 +31,15 @@ end
 g.mapleader = vim.keycode("<space>")
 g.maplocalleader = vim.keycode("\\")
 
+-- Core options and settings
+require("core.options")
+require("core.autocmds")
+require("core.keymaps.editing")
+require("core.keymaps.general")
+require("core.keymaps.navigation")
+
 -- Enable the new UI
 require("vim._core.ui2").enable({})
-
--- inline diagnostics
-vim.diagnostic.config({ virtual_text = true })
-
 
 _G.Config = {}
 vim.pack.add({ "https://github.com/nvim-mini/mini.misc" })

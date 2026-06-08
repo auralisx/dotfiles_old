@@ -3,11 +3,11 @@ local function augroup(name)
 end
 
 -- BUFFER & FILE BEHAVIOR
-local file_group = augroup("file_behavior")
+local buffer_group = augroup("buffer_behavior")
 
 -- Autosave on specific events (Zed-style)
 vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertLeave" }, {
-	group = file_group,
+	group = buffer_group,
 	callback = function()
 		if vim.bo.modified and vim.bo.buftype == "" and vim.fn.expand("%") ~= "" then
 			vim.cmd("silent! update | redraw")
@@ -18,7 +18,7 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertLeave" }, {
 
 -- open help in vertical split
 vim.api.nvim_create_autocmd("FileType", {
-	group = file_group,
+	group = buffer_group,
 	pattern = "help",
 	command = "wincmd L",
 	desc = "Open help in vertical split",
@@ -26,7 +26,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Return to last edit position
 vim.api.nvim_create_autocmd("BufReadPost", {
-	group = file_group,
+	group = buffer_group,
 	callback = function(args)
 		local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
 		local line_count = vim.api.nvim_buf_line_count(args.buf)
@@ -42,7 +42,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 -- Auto-create parent directories
 vim.api.nvim_create_autocmd("BufWritePre", {
-	group = file_group,
+	group = buffer_group,
 	callback = function(event)
 		if event.match:match("^%w%w+:[\\/][\\/]") then
 			return
@@ -50,6 +50,25 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 		local file = vim.uv.fs_realpath(event.match) or event.match
 		local dir = vim.fn.fnamemodify(file, ":p:h")
 		vim.fn.mkdir(dir, "p")
+	end,
+})
+
+-- wrap and check for spell in text filetypes
+vim.api.nvim_create_autocmd("FileType", {
+	group = buffer_group,
+	pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
+	callback = function()
+		vim.opt_local.wrap = true
+		vim.opt_local.spell = true
+	end,
+})
+
+-- Fix conceallevel for json files
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	group = buffer_group,
+	pattern = { "json", "jsonc", "json5" },
+	callback = function()
+		vim.opt_local.conceallevel = 0
 	end,
 })
 
@@ -106,20 +125,6 @@ vim.api.nvim_create_autocmd("TermOpen", {
 	end,
 })
 
--- Auto-close Neovim if only special windows are left (Netrw, Quickfix, Help)
-vim.api.nvim_create_autocmd("BufEnter", {
-	group = special_group,
-	callback = function()
-		if #vim.api.nvim_list_wins() == 1 then
-			local ft = vim.bo.filetype
-			local bt = vim.bo.buftype
-			if ft == "netrw" or ft == "help" or bt == "quickfix" then
-				vim.cmd("quit")
-			end
-		end
-	end,
-})
-
 -- Undotree settings
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "nvim-undotree",
@@ -153,7 +158,7 @@ vim.api.nvim_create_autocmd("BufRead", {
 })
 
 -- Vim Pack
-local pack_group = augroup("package_manager")
+-- local pack_group = augroup("package_manager")
 
 -- remove plugins from disk that are no longer in vim.pack.add() specs
 vim.api.nvim_create_user_command("PackClean", function()

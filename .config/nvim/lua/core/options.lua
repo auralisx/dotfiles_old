@@ -19,7 +19,7 @@ o.smartindent = true -- Enable smart auto-indenting for code
 o.smarttab = true -- Use shiftwidth for tab in insert mode
 o.smartcase = true -- Respect case if search pattern has upper case
 o.spelloptions = "camel" -- Treat camelCase word parts as separate words
-o.autocomplete = true -- Enable auto-completion features
+-- o.autocomplete = true -- Enable auto-completion features
 
 o.number = true -- Show absolute line numbers
 o.relativenumber = true -- Show line numbers relative to cursor
@@ -35,11 +35,12 @@ opt.wildignore:append("*/node_modules/*") -- Ignore in file completion
 
 -- Completion menu behavior
 opt.completeopt = {
+	"menu",
 	"menuone",
 	"noselect",
 	"popup",
-	"fuzzy",
-	"nosort",
+	-- "fuzzy",
+	-- "nosort",
 	"preview",
 }
 
@@ -65,6 +66,7 @@ o.foldtext = "" -- Use default fold line display
 -- -----------------------------------------------------------------------------
 
 o.autowrite = true -- Save file when switching buffers
+o.autoread = true -- Detect changes outside Nvim
 o.swapfile = false -- Disable swap files
 o.backup = false -- Disable backup files
 o.writebackup = false -- Disable backup before write
@@ -75,6 +77,7 @@ opt.sessionoptions = {
 	"curdir",
 	"tabpages",
 	"winsize",
+	"winpos",
 	"help",
 	"globals",
 	"skiprtp",
@@ -114,7 +117,7 @@ o.cmdheight = 1 -- Command line height
 o.showmode = true -- Show mode in command line
 o.laststatus = 3 -- Global statusline
 
-o.wrap = true -- Wrap long lines
+o.wrap = false -- Wrap long lines
 o.linebreak = true -- Break lines at appropriate characters
 o.breakindent = true -- Indent wrapped lines to match original
 
@@ -126,6 +129,7 @@ o.concealcursor = "" -- Show concealed text outside insert mode
 
 o.virtualedit = "block" -- Allow cursor beyond end of line in block mode
 o.smoothscroll = true -- Smooth scrolling (if terminal supports it)
+o.termguicolors = true -- Enable 24 bit color
 
 o.lazyredraw = true -- Don't redraw while executing macros. Faster scrolling
 

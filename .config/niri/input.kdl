@@ -1,17 +1,8 @@
 input {
     keyboard {
-        xkb {
-            // layout "us"
-            // variant "colemak_dh_ortho"
-            // options "compose:ralt,ctrl:nocaps"
-            // model ""
-            // rules ""
-            // file "~/.config/keymap.xkb"
-        }
-
         // repeat-delay 600
         // repeat-rate 25
-        track-layout "window"
+        // track-layout "window"
         // numlock
     }
 
@@ -25,13 +16,13 @@ input {
         natural-scroll
         accel-speed 0.7
         scroll-method "two-finger"
+        tap-button-map "left-middle-right"
         // scroll-factor 1.0
         // disabled-on-external-mouse
         // accel-profile "flat"
         // scroll-factor vertical=1.0 horizontal=-2.0
         // scroll-button 273
         // scroll-button-lock
-        // tap-button-map "left-middle-right"
         // click-method "clickfinger"
         // left-handed
         // middle-emulation

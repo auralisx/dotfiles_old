@@ -1,6 +1,6 @@
 layout {
     background-color "#24283b"
-    gaps 5
+    gaps 1
     center-focused-column "never"
     always-center-single-column
     empty-workspace-above-first

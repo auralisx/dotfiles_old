@@ -72,7 +72,7 @@ binds {
     Mod+Alt+D hotkey-overlay-title="<b>Edit Dotfiles: </b> ~/dotfiles/" { spawn-sh "zeditor ~/dotfiles/"; }
     Mod+Alt+Menu hotkey-overlay-title="<b>Launch Project:</b> Zeditor" {
         spawn-sh "
-            project=$(fd -d 1 --type d . ~/Projects | fuzzel --dmenu --prompt='Open Project: ' --lines=15 --width=60) &&
+            project=$(fd -d 1 --type d . ~/Dev | fuzzel --dmenu --prompt='Open Project: ' --lines=15 --width=60) &&
             [ -n \"$project\" ] &&
             zeditor \"$project\"
         ";
@@ -169,22 +169,13 @@ binds {
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Shift+Ctrl+Left  { move-window-to-monitor-left; }
-    // ...
 
     // And you can also move a whole workspace to another monitor:
     // Mod+Shift+Ctrl+Left  { move-workspace-to-monitor-left; }
-    // ...
 
-    Mod+U              { focus-workspace-up; }
-    Mod+D              { focus-workspace-down; }
-    Mod+Shift+U        { move-window-to-workspace-up; }
-    Mod+Shift+D        { move-window-to-workspace-down; }
-    Mod+Ctrl+U         { move-column-to-workspace-up; }
-    Mod+Ctrl+D         { move-column-to-workspace-down; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
-    // ...
 
     Mod+Up          { move-workspace-up; }
     Mod+Down        { move-workspace-down; }
@@ -196,15 +187,15 @@ binds {
     Mod+Shift+Minus { set-window-height "-10%"; }
     Mod+Shift+Equal { set-window-height "+10%"; }
 
-    Mod+C { focus-workspace "dev"; }
+    Mod+D { focus-workspace "dev"; }
     Mod+W { focus-workspace "web"; }
     Mod+E { focus-workspace "entertainment"; }
 
-    Mod+Shift+C { move-window-to-workspace "dev"; }
+    Mod+Shift+D { move-window-to-workspace "dev"; }
     Mod+Shift+W { move-window-to-workspace "web"; }
     Mod+Shift+E { move-window-to-workspace "entertainment"; }
 
-    Mod+Ctrl+C { move-column-to-workspace "dev"; }
+    Mod+Ctrl+D { move-column-to-workspace "dev"; }
     Mod+Ctrl+W { move-column-to-workspace "web"; }
     Mod+Ctrl+E { move-column-to-workspace "entertainment"; }
 
@@ -217,6 +208,6 @@ binds {
     //
     // The allow-inhibiting=false property can be applied to other binds as well,
     // which ensures niri always processes them, even when an inhibitor is active.
-    Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+    Mod+Shift+Ctrl+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
 }

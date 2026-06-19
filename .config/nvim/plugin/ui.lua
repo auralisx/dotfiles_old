@@ -1,23 +1,24 @@
-Config.now(function()
-	-- Initialize the statusline module
-	local stl = require("statusline")
-	stl.setup()
+-- Enable the new UI
+require("vim._core.ui2").enable({})
 
-	vim.pack.add({
-		"https://github.com/folke/tokyonight.nvim",
-		"https://github.com/nvim-mini/mini.tabline",
-		"https://github.com/nvim-mini/mini.icons",
-	})
+-- Initialize the statusline module
+local statusline = require("features.statusline")
+statusline.setup()
 
-	require("tokyonight").setup({})
-	vim.cmd.colorscheme("tokyonight-night")
-	require("mini.tabline").setup()
-	require("mini.icons").setup()
-	Config.later(MiniIcons.mock_nvim_web_devicons)
-	Config.later(MiniIcons.tweak_lsp_kind)
-end)
+vim.pack.add({
+	"https://github.com/folke/tokyonight.nvim",
+	"https://github.com/nvim-mini/mini.tabline",
+	"https://github.com/nvim-mini/mini.icons",
+})
 
-Config.now_if_args(function()
+require("tokyonight").setup({})
+vim.cmd.colorscheme("tokyonight-night")
+require("mini.tabline").setup()
+require("mini.icons").setup()
+vim.schedule(MiniIcons.mock_nvim_web_devicons)
+vim.schedule(MiniIcons.tweak_lsp_kind)
+
+vim.schedule(function()
 	vim.pack.add({
 		"https://github.com/nvim-mini/mini.clue",
 	})
@@ -26,7 +27,6 @@ Config.now_if_args(function()
 		triggers = {
 			-- Leader triggers
 			{ mode = { "n", "x" }, keys = "<Leader>" },
-
 			-- `[` and `]` keys
 			{ mode = "n", keys = "[" },
 			{ mode = "n", keys = "]" },

@@ -53,14 +53,6 @@
       "rev": "bac6317300e205335df425296570d84322730067",
       "src": "https://github.com/nvim-mini/mini.icons"
     },
-    "mini.misc": {
-      "rev": "c72c90e083bcf24bfb2827d63b4752e414023f3e",
-      "src": "https://github.com/nvim-mini/mini.misc"
-    },
-    "mini.operators": {
-      "rev": "fccb5e3ef0cc319b217ed9c7db1a4672dd6b766c",
-      "src": "https://github.com/nvim-mini/mini.operators"
-    },
     "mini.pairs": {
       "rev": "42387c7fe68fc0b6e95eaf37f1bb76e7bffaa0d9",
       "src": "https://github.com/nvim-mini/mini.pairs"
@@ -97,17 +89,9 @@
       "rev": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e",
       "src": "https://github.com/folke/snacks.nvim"
     },
-    "todo-comments.nvim": {
-      "rev": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668",
-      "src": "https://github.com/folke/todo-comments.nvim"
-    },
     "tokyonight.nvim": {
       "rev": "cdc07ac78467a233fd62c493de29a17e0cf2b2b6",
       "src": "https://github.com/folke/tokyonight.nvim"
-    },
-    "ts-comments.nvim": {
-      "rev": "123a9fb12e7229342f807ec9e6de478b1102b041",
-      "src": "https://github.com/folke/ts-comments.nvim"
     },
     "yazi.nvim": {
       "rev": "49b3417e4bc2002ce8003f8fca275fea1d710d50",

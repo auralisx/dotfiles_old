@@ -1,4 +1,4 @@
-Config.now_if_args(function()
+vim.schedule(function()
 	vim.pack.add({
 		"https://github.com/neovim/nvim-lspconfig",
 		"https://github.com/mason-org/mason.nvim",
@@ -11,6 +11,9 @@ Config.now_if_args(function()
 		ensure_installed = {
 			"lua_ls",
 			"stylua",
+			"phpactor",
+			"laravel_ls",
+			"php-cs-fixer",
 		},
 	})
 end)

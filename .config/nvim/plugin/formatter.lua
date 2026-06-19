@@ -1,4 +1,4 @@
-Config.later(function()
+vim.schedule(function()
 	vim.pack.add({ "https://github.com/stevearc/conform.nvim" })
 
 	require("conform").setup({
@@ -22,11 +22,11 @@ Config.later(function()
 
 	vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 	-- Format on save
-	vim.api.nvim_create_autocmd("BufWritePre", {
-		group = vim.api.nvim_create_augroup("Conform", { clear = true }),
-		pattern = "*",
-		callback = function(args)
-			require("conform").format({ bufnr = args.buf })
-		end,
-	})
+	-- vim.api.nvim_create_autocmd("BufWritePre", {
+	-- 	group = vim.api.nvim_create_augroup("Conform", { clear = true }),
+	-- 	pattern = "*",
+	-- 	callback = function(args)
+	-- 		require("conform").format({ bufnr = args.buf })
+	-- 	end,
+	-- })
 end)

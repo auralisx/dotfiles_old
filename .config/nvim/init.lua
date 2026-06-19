@@ -34,27 +34,6 @@ g.maplocalleader = vim.keycode("\\")
 -- Core options and settings
 require("core.options")
 require("core.autocmds")
-require("core.keymaps.editing")
-require("core.keymaps.general")
-require("core.keymaps.navigation")
-
--- Enable the new UI
-require("vim._core.ui2").enable({})
-
-_G.Config = {}
-vim.pack.add({ "https://github.com/nvim-mini/mini.misc" })
-
-local misc = require("mini.misc")
-Config.now = function(f)
-	misc.safely("now", f)
-end
-Config.later = function(f)
-	misc.safely("later", f)
-end
-Config.now_if_args = vim.fn.argc(-1) > 0 and Config.now or Config.later
-Config.on_event = function(ev, f)
-	misc.safely("event:" .. ev, f)
-end
-Config.on_filetype = function(ft, f)
-	misc.safely("filetype:" .. ft, f)
-end
+require("keymaps.editing")
+require("keymaps.general")
+require("keymaps.navigation")

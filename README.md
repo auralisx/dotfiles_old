@@ -1,7 +1,3 @@
-> [!NOTE]
-> I’ve moved my actively maintained and updated configs to a new dotfiles repository for simplicity.  
-> This old repository is archived for reference. This include wallpapers/screenshots, which made the Git history unnecessarily large.
-
 ## Preview
 
 ### Desktop
